@@ -1,0 +1,95 @@
+
+<template>
+  <div id="app">
+
+    <el-container style="height: 900px; border: 1px solid #eee">
+
+      <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+        <el-menu :default-openeds="['1','2']"  router= "router"    :default-active="$route.path">
+
+
+
+          <el-menu-item :index="msgid">个人信息</el-menu-item>
+          <el-menu-item :index="msgupdata">教师列表</el-menu-item>
+          <el-menu-item :index="courselist_student">班级信息</el-menu-item>
+          <el-menu-item :index="courselisted_student">本班同学</el-menu-item>
+          <el-menu-item :index="msg1">班级成绩</el-menu-item>
+          <el-menu-item :index="msg2">修改密码</el-menu-item>
+<!--          <el-menu-item :index="msg3">修改密码</el-menu-item>-->
+
+
+
+          <!-- <el-menu-item index="2-3">选项3</el-menu-item> -->
+          <el-menu-item index="/Login">退出系统</el-menu-item>
+        </el-menu>
+      </el-aside>
+
+      <el-container>
+        <el-main>
+          <router-view></router-view>
+        </el-main>
+      </el-container>
+
+    </el-container>
+
+  </div>
+</template>
+
+
+<style>
+.el-header {
+  background-color: #B3C0D1;
+  color: #333;
+  line-height: 60px;
+}
+
+.el-aside {
+  color: #333;
+}
+</style>
+
+<script>
+export default {
+  created(){
+    const _this=this
+    this.id=this.$route.query.id
+    this.msgid = "/Index_grpt/grptea?id="+this.id
+    this.msgupdata="/Index_grpt/teaQryReadOnly?id="+this.id
+    this.courselist_student="/Index_grpt/grpQryByTeaWritePartly?id="+this.id
+    this.courselisted_student="/Index_grpt/grpStuByTnum?id="+this.id
+    // this.courselisted_student="/Index_grpt/scrQryByBanjiReadOnly?id="+this.id
+    this.msg1="/Index_grpt/scrQryByBanjiReadOnly?id="+this.id
+    this.msg2="/Index_grpt/LogMdf?id="+this.id
+    this.msg3="/Index_grpt/LogMdf?id="+this.id
+
+    //  axios.get('http://localhost:8181/student/getclasslists').then(function (params) {
+    //    _this.allclass=params.data
+    //    console.log(params.data)
+    //  })
+    // axios.get('http://localhost:8181/student/findall/1/5').then(function (resp) {
+    //   _this.tableData=resp.data.content
+    //   _this.total=resp.data.totalElements
+
+    // })
+  },
+  data() {
+    const item = {
+      // date: '2016-05-02',
+      // name: '不爱喝茶的玄月',
+      // address: '上海市普陀区金沙江路 1518 弄',
+      id:null,
+      msgid:null,
+      msgupdata:null,
+      courselist_student:null,
+      courselisted_student:null,
+      msg1:null,
+      msg2:null,
+      msg3:null,
+    };
+    return {
+      tableData: Array(20).fill(item)
+    };
+
+  }
+};
+</script>
